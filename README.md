@@ -11,8 +11,13 @@
 ```
 headhunter-skills/
 ├── README.md
-└── author-backfill/      # 技术报告 / 论文作者信息检索回填
-    └── SKILL.md
+└── author-backfill/              # 技术报告 / 论文作者信息检索回填
+    ├── SKILL.md                  # WorkBuddy / Claude Code（两平台通用 SKILL.md）
+    ├── PROMPT.md                 # 通用 Markdown / 任意助手（可粘贴的纯指令版）
+    └── adapters/
+        ├── cursor-rules.md       # Cursor 项目规则
+        ├── chatgpt-instructions.md  # ChatGPT / 自定义 GPT Instructions
+        └── codex.md              # OpenAI Codex CLI（codex.md / AGENTS.md）
 ```
 
 ## Skill 索引
@@ -35,6 +40,21 @@ cp -r author-backfill ~/.workbuddy/skills/
 ```
 
 复制后在与 WorkBuddy 对话时直接描述需求（如"帮我把这份技术报告的作者信息检索回填到飞书表"）即可触发对应 skill。
+
+## 跨平台使用（每个 skill 的文件布局）
+
+本仓库的 skill 设计为**平台无关的知识核心 + 薄适配层**，不只能在 WorkBuddy 用：
+
+| 平台 | 用哪个文件 | 怎么用 |
+|------|-----------|--------|
+| **WorkBuddy** | `SKILL.md` | 整个目录复制到 `~/.workbuddy/skills/`，对话即触发 |
+| **Claude Code** | `SKILL.md` | 同样复制到项目的 `~/.claude/skills/<name>/`（Claude Code 也吃 `SKILL.md`，frontmatter 格式一致，几乎零改动） |
+| **Cursor** | `adapters/cursor-rules.md` | 内容放进 `.cursor/rules/author-backfill.mdc` 或项目根 `.cursorrules` |
+| **ChatGPT / 自定义 GPT** | `adapters/chatgpt-instructions.md` | 整段作为自定义 GPT 的 **Instructions** 粘贴 |
+| **OpenAI Codex CLI** | `adapters/codex.md` | 保存为仓库根 `codex.md`（或 `AGENTS.md`）被 Codex 读取 |
+| **任意助手 / 通用 Markdown** | `PROMPT.md` | 纯 Markdown 指令版，复制粘贴到任何支持长提示词的助手即可 |
+
+> **核心说明**：`SKILL.md` 与 `PROMPT.md` 的方法论完全一致；差异只在平台胶水层（如 `lark-cli` 回填命令）。换平台时把表格工具命令替换成你手头的即可，知识本身通用。后续每加一个 skill，都按 `SKILL.md` + `PROMPT.md` + `adapters/` 这套布局即可。
 
 ## 贡献 / 规范
 
