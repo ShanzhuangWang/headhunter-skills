@@ -67,4 +67,4 @@ headhunter-skills/
 
 ## 后续计划
 
-按招聘流程逐步补充分类：talent-research（人才检索 / 回填）、candidate-screening（背调 / 筛选）、outreach（触达）、internal-tools（内部工具）。
+按招聘流程逐步补充分类：talent-research（人才检索 / 回填）、candidate-screening（筛选）、outreach（触达）、internal-tools（内部工具）。
