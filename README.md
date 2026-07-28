@@ -11,7 +11,7 @@
 ```
 headhunter-skills/
 ├── README.md
-└── seed-author-backfill/      # 技术报告 / 论文作者信息检索回填
+└── author-backfill/      # 技术报告 / 论文作者信息检索回填
     └── SKILL.md
 ```
 
@@ -19,7 +19,7 @@ headhunter-skills/
 
 | Skill | 用途 | 状态 |
 |-------|------|------|
-| [seed-author-backfill](./seed-author-backfill/) | 给定公司/团队的技术报告或论文（PDF / arXiv / 团队名），提取全部作者并批量检索中文名、学历、Google Scholar、OpenReview、主页、LinkedIn、GitHub、邮箱、研究方向，闭环交叉验证后回填飞书多维表格 | ✅ 可用 |
+| [author-backfill](./author-backfill/) | 给定公司/团队的技术报告或论文（PDF / arXiv / 团队名），提取全部作者并批量检索中文名、学历、Google Scholar、OpenReview、主页、LinkedIn、GitHub、邮箱、研究方向，闭环交叉验证后回填飞书多维表格 | ✅ 可用 |
 
 ## 如何使用
 
@@ -31,7 +31,7 @@ headhunter-skills/
 例如：
 
 ```bash
-cp -r seed-author-backfill ~/.workbuddy/skills/
+cp -r author-backfill ~/.workbuddy/skills/
 ```
 
 复制后在与 WorkBuddy 对话时直接描述需求（如"帮我把这份技术报告的作者信息检索回填到飞书表"）即可触发对应 skill。
