@@ -1,63 +1,70 @@
 # headhunter-skills
 
-猎头 / 招聘场景自建 **WorkBuddy Skill** 合集。按类别存放各类人员检索、背调、触达、内部提效等自动化 skill，全部由本人（ShanzhuangWang）在实践中沉淀、自用。
+> 跨平台通用的 **猎头 / 人才研究 AI Skill 合集** —— 一套方法论，多个 AI 助手都能跑。
 
-> 定位：AI Talent Partner 的工具箱。每个 skill 对应招聘流水线中的一个可复用环节。
+本仓库收集我在猎头与人才研究工作中沉淀的 AI skill（指令集）。每个 skill 都以**平台无关**的方式编写，可在 WorkBuddy、Claude Code、Cursor、ChatGPT、OpenAI Codex 等多种 AI 助手上使用，不绑定任何单一平台。
+
+> 定位：AI Talent Partner 的工具箱。每个 skill 对应招聘流水线中的一个可复用环节（找人、验证、触达、提效）。
+
+## 这是什么
+
+- **不是某个平台的私有格式**，而是基于通用 Markdown 的方法论 + 薄平台适配层。
+- 每个 skill 的核心是一份可复用、可审计的人工经验（怎么找人、怎么验证、怎么避免踩坑）。
+- 平台差异只在外层胶水（如"把结果写入飞书表"这类执行动作），换平台时替换对应部分即可，知识本身通用。
+
+## 适用平台
+
+| 平台 | 使用的文件 | 安装 / 启用方式 |
+|------|-----------|----------------|
+| **WorkBuddy** | `SKILL.md` | 复制目录到 `~/.workbuddy/skills/` |
+| **Claude Code** | `SKILL.md` | 复制目录到 `~/.claude/skills/<name>/`（同样吃 `SKILL.md`，frontmatter 一致，几乎零改动） |
+| **Cursor** | `adapters/cursor-rules.md` | 放入 `.cursor/rules/` 或项目根 `.cursorrules` |
+| **ChatGPT / 自定义 GPT** | `adapters/chatgpt-instructions.md` | 整段粘贴到自定义 GPT 的 **Instructions** |
+| **OpenAI Codex CLI** | `adapters/codex.md` | 存为仓库根 `codex.md` / `AGENTS.md` |
+| **任意助手 / 通用 Markdown** | `PROMPT.md` | 纯 Markdown 指令版，复制粘贴即用 |
 
 ## 仓库结构
-
-目前按"先平铺"组织：每个 skill 放在自己的目录里（这是 WorkBuddy skill 的规范，目录名即 skill 名），后续会按招聘流程加顶层分类目录。
 
 ```
 headhunter-skills/
 ├── README.md
-└── author-backfill/              # 技术报告 / 论文作者信息检索回填
-    ├── SKILL.md                  # WorkBuddy / Claude Code（两平台通用 SKILL.md）
-    ├── PROMPT.md                 # 通用 Markdown / 任意助手（可粘贴的纯指令版）
+└── author-backfill/
+    ├── SKILL.md                      # WorkBuddy / Claude Code 原生格式（frontmatter: name/summary）
+    ├── PROMPT.md                     # 平台无关的纯指令版（任何助手可用）
     └── adapters/
-        ├── cursor-rules.md       # Cursor 项目规则
-        ├── chatgpt-instructions.md  # ChatGPT / 自定义 GPT Instructions
-        └── codex.md              # OpenAI Codex CLI（codex.md / AGENTS.md）
+        ├── cursor-rules.md           # Cursor 项目规则
+        ├── chatgpt-instructions.md   # ChatGPT / GPTs Instructions
+        └── codex.md                  # OpenAI Codex CLI（codex.md / AGENTS.md）
 ```
+
+> 每个 skill 由「原生格式 + 通用指令版 + 平台适配层」组成，结构统一，便于跨平台复用。
 
 ## Skill 索引
 
 | Skill | 用途 | 状态 |
 |-------|------|------|
-| [author-backfill](./author-backfill/) | 给定公司/团队的技术报告或论文（PDF / arXiv / 团队名），提取全部作者并批量检索中文名、学历、Google Scholar、OpenReview、主页、LinkedIn、GitHub、邮箱、研究方向，闭环交叉验证后回填飞书多维表格 | ✅ 可用 |
+| [author-backfill](./author-backfill/) | 给定公司 / 团队的技术报告或论文（PDF / arXiv / 团队名），提取全部作者并批量检索中文名、学历、Google Scholar、OpenReview、主页、LinkedIn、GitHub、邮箱、研究方向，闭环交叉验证后回填飞书多维表格 | ✅ 可用 |
 
-## 如何使用
+## 如何新增一个 skill
 
-将某个 skill 目录整体复制到 WorkBuddy 的 skills 目录即可启用：
+每个新 skill 请按统一布局添加，保证天然跨平台：
 
-- **用户级（所有项目可用）**：`~/.workbuddy/skills/<skill-name>/`
-- **项目级（团队共享）**：`<项目>/.workbuddy/skills/<skill-name>/`
-
-例如：
-
-```bash
-cp -r author-backfill ~/.workbuddy/skills/
+```
+<skill-name>/
+├── SKILL.md                    # 两平台通用原生格式（WorkBuddy / Claude Code）
+├── PROMPT.md                   # 平台无关纯指令版
+└── adapters/
+    ├── cursor-rules.md         # Cursor
+    ├── chatgpt-instructions.md # ChatGPT / GPTs
+    └── codex.md                # OpenAI Codex
 ```
 
-复制后在与 WorkBuddy 对话时直接描述需求（如"帮我把这份技术报告的作者信息检索回填到飞书表"）即可触发对应 skill。
+## 设计原则
 
-## 跨平台使用（每个 skill 的文件布局）
+1. **方法论优先**：核心知识写成纯 Markdown，与执行工具解耦。
+2. **薄适配层**：平台相关命令集中在 `adapters/` 与各平台头部，互不污染。
+3. **可审计**：每个结论带证据来源与置信度，结论可复核。
 
-本仓库的 skill 设计为**平台无关的知识核心 + 薄适配层**，不只能在 WorkBuddy 用：
+## 后续计划
 
-| 平台 | 用哪个文件 | 怎么用 |
-|------|-----------|--------|
-| **WorkBuddy** | `SKILL.md` | 整个目录复制到 `~/.workbuddy/skills/`，对话即触发 |
-| **Claude Code** | `SKILL.md` | 同样复制到项目的 `~/.claude/skills/<name>/`（Claude Code 也吃 `SKILL.md`，frontmatter 格式一致，几乎零改动） |
-| **Cursor** | `adapters/cursor-rules.md` | 内容放进 `.cursor/rules/author-backfill.mdc` 或项目根 `.cursorrules` |
-| **ChatGPT / 自定义 GPT** | `adapters/chatgpt-instructions.md` | 整段作为自定义 GPT 的 **Instructions** 粘贴 |
-| **OpenAI Codex CLI** | `adapters/codex.md` | 保存为仓库根 `codex.md`（或 `AGENTS.md`）被 Codex 读取 |
-| **任意助手 / 通用 Markdown** | `PROMPT.md` | 纯 Markdown 指令版，复制粘贴到任何支持长提示词的助手即可 |
-
-> **核心说明**：`SKILL.md` 与 `PROMPT.md` 的方法论完全一致；差异只在平台胶水层（如 `lark-cli` 回填命令）。换平台时把表格工具命令替换成你手头的即可，知识本身通用。后续每加一个 skill，都按 `SKILL.md` + `PROMPT.md` + `adapters/` 这套布局即可。
-
-## 贡献 / 规范
-
-- 每个 skill 必须有 `SKILL.md`，含 YAML frontmatter（`name` / `summary` / `agent_created`）与正文。
-- 正文写明触发场景、端到端流程、关键避坑（铁律）、失败处理。
-- 后续计划按招聘流程分类：talent-research（人才检索/回填）、candidate-screening（背调/筛选）、outreach（触达）、internal-tools（内部工具）。
+按招聘流程逐步补充分类：talent-research（人才检索 / 回填）、candidate-screening（背调 / 筛选）、outreach（触达）、internal-tools（内部工具）。
