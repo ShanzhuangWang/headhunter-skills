@@ -12,22 +12,9 @@
 - 每个 skill 的核心是一份可复用、可审计的人工经验（怎么找人、怎么验证、怎么避免踩坑）。
 - 平台差异只在外层胶水（如"把结果写入飞书表"这类执行动作），换平台时替换对应部分即可，知识本身通用。
 
-## Skill 索引
-
-| Skill | 用途 | 状态 |
-|-------|------|------|
-| [author-backfill](./author-backfill/) | 给定公司 / 团队的技术报告或论文（PDF / arXiv / 团队名），提取全部作者并批量检索中文名、学历、Google Scholar、OpenReview、主页、LinkedIn、GitHub、邮箱、研究方向，闭环交叉验证后回填飞书多维表格 | ✅ 可用 |
-
 ## 适用平台
 
-| 平台 | 使用的文件 | 安装 / 启用方式 |
-|------|-----------|----------------|
-| **WorkBuddy** | `SKILL.md` | 复制目录到 `~/.workbuddy/skills/` |
-| **Claude Code** | `SKILL.md` | 复制目录到 `~/.claude/skills/<name>/`（同样吃 `SKILL.md`，frontmatter 一致，几乎零改动） |
-| **Cursor** | `adapters/cursor-rules.md` | 放入 `.cursor/rules/` 或项目根 `.cursorrules` |
-| **ChatGPT / 自定义 GPT** | `adapters/chatgpt-instructions.md` | 整段粘贴到自定义 GPT 的 **Instructions** |
-| **OpenAI Codex CLI** | `adapters/codex.md` | 存为仓库根 `codex.md` / `AGENTS.md` |
-| **任意助手 / 通用 Markdown** | `PROMPT.md` | 纯 Markdown 指令版，复制粘贴即用 |
+每个 skill 的跨平台使用方式（WorkBuddy / Claude Code / Cursor / ChatGPT / Codex 等）见各 skill 目录内的 `README.md`，例如 [author-backfill/README.md](./author-backfill/README.md)。
 
 ## 仓库结构
 
@@ -44,6 +31,12 @@ headhunter-skills/
 ```
 
 > 每个 skill 由「原生格式 + 通用指令版 + 平台适配层」组成，结构统一，便于跨平台复用。
+
+## Skill 索引
+
+| Skill | 用途 | 状态 |
+|-------|------|------|
+| [author-backfill](./author-backfill/) | 给定公司 / 团队的技术报告或论文（PDF / arXiv / 团队名），提取全部作者并批量检索中文名、学历、Google Scholar、OpenReview、主页、LinkedIn、GitHub、邮箱、研究方向，闭环交叉验证后回填飞书多维表格 | ✅ 可用 |
 
 ## 如何新增一个 skill
 
@@ -67,4 +60,4 @@ headhunter-skills/
 
 ## 后续计划
 
-按招聘流程逐步补充分类：talent-research（人才检索 / 回填）、candidate-screening（筛选）、outreach（触达）、internal-tools（内部工具）。
+按招聘流程逐步补充分类：talent-research（人才检索 / 回填）、candidate-screening（背调 / 筛选）、outreach（触达）、internal-tools（内部工具）。
