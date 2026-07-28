@@ -12,6 +12,12 @@
 - 每个 skill 的核心是一份可复用、可审计的人工经验（怎么找人、怎么验证、怎么避免踩坑）。
 - 平台差异只在外层胶水（如"把结果写入飞书表"这类执行动作），换平台时替换对应部分即可，知识本身通用。
 
+## Skill 索引
+
+| Skill | 用途 | 状态 |
+|-------|------|------|
+| [author-backfill](./author-backfill/) | 给定公司 / 团队的技术报告或论文（PDF / arXiv / 团队名），提取全部作者并批量检索中文名、学历、Google Scholar、OpenReview、主页、LinkedIn、GitHub、邮箱、研究方向，闭环交叉验证后回填飞书多维表格 | ✅ 可用 |
+
 ## 适用平台
 
 | 平台 | 使用的文件 | 安装 / 启用方式 |
@@ -38,12 +44,6 @@ headhunter-skills/
 ```
 
 > 每个 skill 由「原生格式 + 通用指令版 + 平台适配层」组成，结构统一，便于跨平台复用。
-
-## Skill 索引
-
-| Skill | 用途 | 状态 |
-|-------|------|------|
-| [author-backfill](./author-backfill/) | 给定公司 / 团队的技术报告或论文（PDF / arXiv / 团队名），提取全部作者并批量检索中文名、学历、Google Scholar、OpenReview、主页、LinkedIn、GitHub、邮箱、研究方向，闭环交叉验证后回填飞书多维表格 | ✅ 可用 |
 
 ## 如何新增一个 skill
 
